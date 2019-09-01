@@ -31,4 +31,8 @@ public:
     virtual void        keyRepeat(KeyID, KeyModifierMask,
                             SInt32 count, KeyButton);
     virtual void        keyUp(KeyID, KeyModifierMask, KeyButton);
+    virtual void        mouseMove(SInt32 xAbs, SInt32 yAbs);
+    virtual void        enter(SInt32 xAbs, SInt32 yAbs,
+                            UInt32 seqNum, KeyModifierMask mask, bool);
+    virtual bool        leave();
 };

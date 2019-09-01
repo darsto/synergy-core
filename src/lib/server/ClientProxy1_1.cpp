@@ -59,3 +59,25 @@ ClientProxy1_1::keyUp(KeyID key, KeyModifierMask mask, KeyButton button)
     LOG((CLOG_DEBUG1 "send key up to \"%s\" id=%d, mask=0x%04x, button=0x%04x", getName().c_str(), key, mask, button));
     ProtocolUtil::writef(getStream(), kMsgDKeyUp, key, mask, button);
 }
+
+void
+ClientProxy1_1::mouseMove(SInt32 xAbs, SInt32 yAbs)
+{
+    LOG((CLOG_DEBUG2 "send mouse move to \"%s\" %d,%d", getName().c_str(), xAbs, yAbs));
+    ProtocolUtil::writef(getStream(), kMsgDMouseMove, xAbs, yAbs);
+}
+
+void
+ClientProxy1_1::enter(SInt32 xAbs, SInt32 yAbs,
+                UInt32 seqNum, KeyModifierMask mask, bool)
+{
+    ProtocolUtil::writef(getStream(), kMsgCEnter,
+                                xAbs, yAbs, seqNum, mask);
+}
+
+bool
+ClientProxy1_1::leave()
+{
+    ProtocolUtil::writef(getStream(), kMsgCLeave);
+    return true;
+}
